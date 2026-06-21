@@ -1,4 +1,4 @@
-# Loan Default Risk Prediction System 🏦
+# Loan Default Risk Prediction System 💵
 
 ## 🏦 Business Domain
 
