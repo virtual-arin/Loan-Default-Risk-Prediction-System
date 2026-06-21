@@ -1,60 +1,94 @@
-# Loan Default Risk Prediction
+# Loan Default Risk Prediction System 💳📊
 
-## 🎉 Problem Statement
-A bank provides various types of loans (home loans, personal loans, etc.) to customers. However, some borrowers fail to repay their loans (default), which results in significant financial losses.
+## 🏦 Business Domain
 
-## 📌 Overview
-Built a machine learning model to predict whether a loan applicant will default, helping reduce financial risk in banking.
+Banking & Financial Services
+ 
+## 🤔 Problem Statement
 
-## 🎯 Objective
-- Classify applicants as **Default (1)** or **Not Default (0)**
-- Improve loan approval decisions and minimize losses
+Loan defaults can lead to significant financial losses for lenders. Accurately identifying high-risk borrowers before loan approval helps reduce credit risk and improve lending decisions.
 
-## 📊 Dataset
-- 255,347 records, 18 features  
-- Includes demographics, financial profile, and loan details  
-- Default rate: ~11.6% (imbalanced dataset)
+## 🎯 Project Objective
 
-## Data Visualization
-- Default Distribution
+Build a machine learning classification model to predict whether a borrower is likely to default on a loan based on demographic, financial, and credit-related information.
 
-  ![Default Distribution](https://github.com/virtual-arin/Loan-Default-Risk-Prediction/blob/main/images/default_pie_distribution.png)
+## 📊 Dataset Overview
 
-- Numerical Univariate Analysis
+The dataset contains borrower information such as income, employment details, credit history, loan characteristics, and repayment behavior.
 
-  ![Numerical Univariate Analysis](https://github.com/virtual-arin/Loan-Default-Risk-Prediction/blob/main/images/numerical_univariate_distribution.png)
+**Target Variable:** `Default`
 
-- Numerical Bivariate Analysis
-
-  ![Numerical Bivariate Analysis](http://github.com/virtual-arin/Loan-Default-Risk-Prediction/blob/main/images/numerical_bivariate_distribution.png)
-
-- Categorical Univariate Analysis
-
-  ![Categorical Univariate Analysis](https://github.com/virtual-arin/Loan-Default-Risk-Prediction/blob/main/images/categorical_univariate_distribution.png)
-
-- Categorical Bivariate Analysis
-
-  ![Categorical Bivariate Analysis](https://github.com/virtual-arin/Loan-Default-Risk-Prediction/blob/main/images/categorical_bivariate_distribution.png)
-
-- Feature Importance
-
-  ![Feature Importance](https://github.com/virtual-arin/Loan-Default-Risk-Prediction/blob/main/images/feature_importance.png)
+* 0 → No Default
+* 1 → Default
 
 ## 🛠️ Tech Stack
-- Python, Pandas, NumPy  
-- Matplotlib, Seaborn  
-- Scikit-learn  
 
-## ⚙️ Approach
-- Performed EDA and feature analysis  
-- Preprocessed data (handled imbalance, removed irrelevant features)  
-- Trained **Logistic Regression** (`class_weight='balanced'`)  
+* Python
+* Pandas, NumPy
+* Matplotlib, Seaborn
+* Scikit-Learn
+* Joblib
+* Streamlit
 
-## 📈 Results
-- Accuracy: **67%**  
-- Recall (Default): **69%**  
-- Insight: A high recall means the model catches most potential defaulters.
+## 📂 Project Structure
 
-## 🚀 Run Locally
-```bash
-pip install -r requirements.txt
+```text
+├── data/
+├── notebooks/
+│   ├── Data Analysis.ipynb
+│   ├── Feature Engineering.ipynb
+│   └── Model Training & Evaluation.ipynb
+├── models/
+│   └── loan_default_risk_model.pkl
+├── app.py
+└── README.md
+```
+
+## 🔄 Workflow
+
+### 1. Data Analysis
+
+* Performed EDA to understand borrower behavior.
+* Analyzed feature distributions and default patterns.
+* Handled missing values and outliers.
+
+### 2. Feature Engineering
+
+* Encoded categorical features.
+* Created financial and credit-related indicators.
+* Prepared data for machine learning models.
+
+### 3. Model Training
+
+Trained and evaluated:
+
+* Logistic Regression
+* Decision Tree
+* Random Forest
+* Gradient Boosting
+
+### 4. Hyperparameter Optimization
+
+* Used GridSearchCV to improve model performance.
+* Selected the best-performing model based on validation metrics.
+
+### 5. Deployment
+
+* Saved the trained model using Joblib.
+* Built a Streamlit application for real-time loan default prediction.
+
+## 📈 Results Summary
+
+| Model               | Status             |
+| ------------------- | ------------------ |
+| Gradient Boosting   | 🏆 Champion Model  |
+| Adaboost            | Strong Performance |
+| Random Forest	      | Moderate           |
+| Logistic Regression | Baseline           |
+
+## 🚀 Business Impact
+
+* Reduces loan default risk.
+* Improves lending decisions.
+* Supports automated credit risk assessment.
+* Enhances financial risk management.
