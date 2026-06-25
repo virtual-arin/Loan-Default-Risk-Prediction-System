@@ -8,7 +8,7 @@ import joblib
 # =====================================================
 
 st.set_page_config(
-    page_title="Loan Default Risk Prediction",
+    page_title="Loan Default Risk Predictor",
     page_icon="💰",
     layout="centered"
 )
@@ -40,12 +40,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # =====================================================
-# LOAD MODEL
+# LOAD MODEL & SCALER
 # =====================================================
 
 model = joblib.load("model/loan_default_risk_model.pkl")
-
-feature_columns = model.feature_names_in_
+scaler = joblib.load("model/scaler.pkl")
+feature_columns = joblib.load("model/feature_columns.pkl")
 
 # =====================================================
 # HEADER
@@ -67,23 +67,59 @@ st.markdown(
 
 st.subheader("👤 Applicant Information")
 
-age = st.number_input("Age", min_value=18, max_value=100, value=35)
+age = st.number_input(
+    "Age",
+    min_value=18,
+    max_value=100,
+    value=35
+)
 
-income = st.number_input("Annual Income", min_value=1000.0, value=50000.0)
+income = st.number_input(
+    "Annual Income",
+    min_value=1000.0,
+    value=50000.0
+)
 
-credit_score = st.slider("Credit Score", 300, 850, 650)
+credit_score = st.slider(
+    "Credit Score",
+    300,
+    850,
+    650
+)
 
-months_employed = st.slider("Months Employed", 0, 600, 60)
+months_employed = st.slider(
+    "Months Employed",
+    0,
+    600,
+    60
+)
 
-num_credit_lines = st.slider("Number of Credit Lines", 1, 20, 5)
+num_credit_lines = st.slider(
+    "Number of Credit Lines",
+    1,
+    20,
+    5
+)
 
-employment_type = st.selectbox("Employment Type",["Full-time", "Part-time", "Self-employed", "Unemployed"])
+employment_type = st.selectbox(
+    "Employment Type",
+    ["Full-time", "Part-time", "Self-employed", "Unemployed"]
+)
 
-education = st.selectbox("Education",["High School", "Bachelor's", "Master's", "PhD"])
+education = st.selectbox(
+    "Education",
+    ["High School", "Bachelor's", "Master's", "PhD"]
+)
 
-marital_status = st.selectbox("Marital Status",["Divorced", "Married", "Single"])
+marital_status = st.selectbox(
+    "Marital Status",
+    ["Divorced", "Married", "Single"]
+)
 
-has_dependents = st.selectbox("Has Dependents", ["No", "Yes"])
+has_dependents = st.selectbox(
+    "Has Dependents",
+    ["No", "Yes"]
+)
 
 st.divider()
 
@@ -93,19 +129,45 @@ st.divider()
 
 st.subheader("🏦 Loan Information")
 
-loan_amount = st.number_input("Loan Amount", min_value=1000.0, value=20000.0)
+loan_amount = st.number_input(
+    "Loan Amount",
+    min_value=1000.0,
+    value=20000.0
+)
 
-loan_term = st.selectbox("Loan Term (Months)", [12, 24, 36, 48, 60, 72, 84])
+loan_term = st.selectbox(
+    "Loan Term (Months)",
+    [12, 24, 36, 48, 60, 72, 84]
+)
 
-interest_rate = st.slider("Interest Rate (%)",1.0, 30.0, 10.0)
+interest_rate = st.slider(
+    "Interest Rate (%)",
+    1.0,
+    30.0,
+    10.0
+)
 
-dti_ratio = st.slider("Debt-To-Income Ratio", 0.0, 1.0, 0.30)
+dti_ratio = st.slider(
+    "Debt-To-Income Ratio",
+    0.0,
+    1.0,
+    0.30
+)
 
-loan_purpose = st.selectbox("Loan Purpose", ["Auto", "Business", "Education", "Home", "Other"])
+loan_purpose = st.selectbox(
+    "Loan Purpose",
+    ["Auto", "Business", "Education", "Home", "Other"]
+)
 
-has_cosigner = st.selectbox("Has Co-Signer", ["No", "Yes"])
+has_cosigner = st.selectbox(
+    "Has Co-Signer",
+    ["No", "Yes"]
+)
 
-has_mortgage = st.selectbox("Has Mortgage", ["No", "Yes"])
+has_mortgage = st.selectbox(
+    "Has Mortgage",
+    ["No", "Yes"]
+)
 
 # =====================================================
 # FEATURE ENGINEERING
@@ -161,7 +223,7 @@ for feature, value in numeric_data.items():
         input_df.loc[0, feature] = value
 
 # =====================================================
-# ONE-HOT ENCODING
+# ONE HOT ENCODING
 # =====================================================
 
 categorical_columns = [
@@ -184,21 +246,29 @@ st.divider()
 # PREDICTION
 # =====================================================
 
-if st.button(
-    "🔍 Predict Default Risk",
-    use_container_width=True
-):
+if st.button("🔍 Predict Default Risk", use_container_width=True):
 
-    prediction = model.predict(input_df)[0]
+    input_scaled = scaler.transform(input_df)
 
-    probability = model.predict_proba(input_df)[0][1]
+    prediction = model.predict(input_scaled)[0]
+
+    probability = model.predict_proba(input_scaled)[0][1]
 
     if prediction == 1:
         st.error(
-            f"⚠️ High Risk Customer\n\nEstimated Default Probability: {probability*100:.2f}%"
+            f"""
+            ⚠️ High Risk Customer
+
+            Estimated Default Probability:
+            {probability*100:.2f}%
+            """
         )
     else:
         st.success(
-            f"✅ Low Risk Customer\n\nEstimated Default Probability: {probability*100:.2f}%"
-        )
+            f"""
+            ✅ Low Risk Customer
 
+            Estimated Default Probability:
+            {probability*100:.2f}%
+            """
+        )
