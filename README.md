@@ -6,15 +6,21 @@ Banking & Financial Services
 
 -----
  
+## 🏢 About the Company
+
+Langford Banking Group is a banking and financial services company focused on providing safe, reliable, and data-driven lending solutions. The bank uses technology and analytics to assess borrower risk, improve credit decisions, reduce financial losses, and support responsible lending. Langford Banking Group aims to make loan approvals more efficient while strengthening credit risk management across its lending operations and customer base.
+
+-----
+ 
 ## 🤔 Problem Statement
 
-Loan defaults can lead to significant financial losses for lenders. Accurately identifying high-risk borrowers before loan approval helps reduce credit risk and improve lending decisions.
+Langford Banking Group wants to predict whether a borrower is likely to default on a loan before approval. The model uses demographic, financial, employment, credit, and loan-related information to identify high-risk borrowers and help the bank make safer, data-driven lending decisions while minimizing avoidable credit risk for lenders.
 
 -----
 
-## 🎯 Project Objective
+## 🎯 Objective
 
-The objective of the project is to build a machine learning classification model that predicts whether a borrower is likely to default on a loan based on demographic, financial, and credit-related information.
+Build a classification model that predicts loan default risk using borrower demographic, financial, employment, credit, and loan information. The goal is to identify high-risk borrowers, reduce financial losses, improve lending decisions, and strengthen credit risk management.
 
 -----
 
@@ -153,7 +159,9 @@ In this imbalanced loan-default problem, I prioritized recall because missing a 
 
 ## 🚀 Business Impact
 
-* Reduces loan default risk.
-* Improves lending decisions.
-* Supports automated credit risk assessment.
-* Enhances financial risk management.
+* Identifies high-risk borrowers before loan approval.
+* Helps reduce potential credit losses.
+* Improves data-driven lending decisions.
+* Detects ~69% of actual defaulters using logistic regression model.
+* Supports automated and scalable credit risk assessment.
+* Strengthens the bank's overall credit risk management.
