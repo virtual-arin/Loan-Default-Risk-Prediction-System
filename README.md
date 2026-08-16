@@ -1,6 +1,6 @@
 # Loan Default Risk Prediction System 💵
 
-## 🏦 Business Domain
+## 🏦 Business Domain 
 
 Banking & Financial Services
 
